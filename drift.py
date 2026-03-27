@@ -5,15 +5,13 @@ def detect_drift():
     df = pd.read_csv("data.csv")
 
     if len(df) < 50:
-        return False, 0.0
+        return False, 1.0
 
-    # Split data into old vs new
-    old_data = df["value"][:len(df)//2]
-    new_data = df["value"][len(df)//2:]
+    old = df["value"][:len(df)//2]
+    new = df["value"][len(df)//2:]
 
-    # Kolmogorov-Smirnov Test
-    stat, p_value = ks_2samp(old_data, new_data)
+    stat, p_value = ks_2samp(old, new)
 
-    drift_detected = p_value < 0.05
+    drift = p_value < 0.05
 
-    return drift_detected, p_value
+    return drift, p_value

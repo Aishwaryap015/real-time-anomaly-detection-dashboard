@@ -1,50 +1,59 @@
 import streamlit as st
-import pandas as pd
 import time
 import matplotlib.pyplot as plt
 from model import detect_anomalies
 from drift import detect_drift
-from generate_data import generate_once
 
 st.set_page_config(page_title="Anomaly Detection", layout="wide")
 
 st.title("🚨 Real-Time Anomaly Detection System")
-st.markdown("### Monitoring live system behavior and detecting anomalies using Machine Learning")
+st.markdown("### Live Monitoring + ML + Drift Detection")
 
-# Run continuously using Streamlit rerun
-for _ in range(1000):  # acts like loop safely
+placeholder = st.empty()
 
-    generate_once()  # generate live data
+while True:
+    try:
+        df = detect_anomalies()
 
-    df = detect_anomalies()
+        if "anomaly" in df.columns:
+            anomalies = df[df["anomaly"] == -1]
 
-    if "anomaly" in df.columns:
-        anomalies = df[df["anomaly"] == -1]
+            drift_detected, p_value = detect_drift()
 
-        drift_detected, p_value = detect_drift()
+            with placeholder.container():
 
-        col1, col2 = st.columns(2)
-        col1.metric("Total Data Points", len(df))
-        col2.metric("Anomalies Detected", len(anomalies))
+                # 🔥 METRICS
+                col1, col2 = st.columns(2)
+                col1.metric("Total Data Points", len(df))
+                col2.metric("Anomalies", len(anomalies))
 
-        if not anomalies.empty:
-            st.error(f"🚨 {len(anomalies)} anomalies detected!")
+                # 🚨 ALERTS
+                if not anomalies.empty:
+                    st.error(f"🚨 {len(anomalies)} anomalies detected!")
 
-        if drift_detected:
-            st.warning(f"⚠️ Data Drift Detected! (p-value: {p_value:.5f})")
+                if drift_detected:
+                    st.warning(f"⚠️ Data Drift Detected (p={p_value:.5f})")
 
-        st.subheader("📈 Live Data with Anomalies")
+                # 📈 GRAPH
+                st.subheader("📈 Live Data")
 
-        st.subheader("📈 Live Data with Anomalies")
+                fig, ax = plt.subplots()
+                ax.plot(df["value"], label="Normal Data")
 
-chart_data = df.copy()
-chart_data["anomaly"] = df["value"]
-chart_data.loc[df["anomaly"] != -1, "anomaly"] = None
+                ax.scatter(anomalies.index,
+                           anomalies["value"],
+                           color="red",
+                           label="Anomaly")
 
-st.line_chart(chart_data[["value", "anomaly"]])
+                ax.legend()
+                st.pyplot(fig)
 
-st.subheader("🚨 Detected Anomalies")
-st.dataframe(anomalies)
+                # 📋 TABLE
+                st.subheader("📋 Detected Anomalies")
+                st.dataframe(anomalies)
 
-    time.sleep(1)
-    st.experimental_rerun()
+        time.sleep(2)
+
+    except Exception as e:
+        st.write("Waiting for data...")
+        time.sleep(2)
