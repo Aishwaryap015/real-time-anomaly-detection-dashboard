@@ -35,14 +35,16 @@ for _ in range(1000):  # acts like loop safely
 
         st.subheader("📈 Live Data with Anomalies")
 
-        fig, ax = plt.subplots()
-        ax.plot(df["value"], label="Normal Data")
-        ax.scatter(anomalies.index, anomalies["value"], color='red', label="Anomaly")
-        ax.legend()
-        st.pyplot(fig)
+        st.subheader("📈 Live Data with Anomalies")
 
-        st.subheader("Detected Anomalies")
-        st.write(anomalies)
+chart_data = df.copy()
+chart_data["anomaly"] = df["value"]
+chart_data.loc[df["anomaly"] != -1, "anomaly"] = None
+
+st.line_chart(chart_data[["value", "anomaly"]])
+
+st.subheader("🚨 Detected Anomalies")
+st.dataframe(anomalies)
 
     time.sleep(1)
     st.experimental_rerun()
