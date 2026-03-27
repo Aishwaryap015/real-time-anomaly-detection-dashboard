@@ -1,3 +1,4 @@
+from model import detect_anomalies
 import streamlit as st
 import time
 import matplotlib.pyplot as plt

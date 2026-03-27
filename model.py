@@ -1,29 +1,13 @@
-import random
-import time
-import csv
-import os
+import pandas as pd
+from sklearn.ensemble import IsolationForest
 
-FILE = "data.csv"
+def detect_anomalies():
+    df = pd.read_csv("data.csv")
 
-def generate_data():
-    # Create file with header if not exists
-    if not os.path.exists(FILE):
-        with open(FILE, "w", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow(["timestamp", "value"])
+    if len(df) < 20:
+        return df
 
-    while True:
-        value = random.randint(20, 80)
+    model = IsolationForest(contamination=0.05, random_state=42)
+    df["anomaly"] = model.fit_predict(df[["value"]])
 
-        # Inject anomaly
-        if random.random() < 0.05:
-            value = random.randint(150, 300)
-
-        with open(FILE, "a", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow([time.time(), value])
-
-        time.sleep(1)
-
-if __name__ == "__main__":
-    generate_data()
+    return df
