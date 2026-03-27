@@ -1,174 +1,209 @@
-📄 🚀 ELITE README (YOUR PROJECT VERSION)
 # 🚨 Real-Time Anomaly Detection & Data Drift Monitoring System
 
 ## 👩‍💻 Author
 
-**Aishwarya Priydarshni**  
-🎓 Final Year B.Tech (CSE - Data Science)  
-💡 Aspiring Machine Learning Engineer  
+**Aishwarya Priydarshni**
+Final Year B.Tech (CSE - Data Science)
+Aspiring Machine Learning Engineer
 
-🔗 GitHub: https://github.com/Aishwaryap015  
-🔗 LinkedIn: https://www.linkedin.com/in/aishwarya-priydarshni  
+* 🔗 GitHub: https://github.com/Aishwaryap015
+* 🔗 LinkedIn: https://www.linkedin.com/in/aishwarya-priydarshni
 
 ---
 
 ## 📌 Overview
 
-Modern machine learning systems require continuous monitoring to ensure reliability.  
-This project implements a **real-time anomaly detection and data drift monitoring system** with a live dashboard.
+In real-world machine learning systems, incoming data continuously changes over time.
+If these changes are not monitored, models can become unreliable and produce incorrect predictions.
 
-The system simulates streaming data, detects anomalies using machine learning, and identifies distribution shifts using statistical methods.
+This project implements a **real-time anomaly detection and data drift monitoring system** that:
+
+* Detects abnormal data points (anomalies)
+* Identifies changes in data distribution (drift)
+* Visualizes everything using a live dashboard
+
+The system simulates streaming data and demonstrates how ML models are monitored in production environments.
 
 ---
 
 ## 🎯 Problem Statement
 
-In real-world systems (fraud detection, system monitoring, IoT), unexpected changes in data can:
+In domains such as finance, healthcare, and system monitoring, unexpected patterns in data can:
 
-- Reduce model accuracy  
-- Cause system failures  
-- Lead to incorrect predictions  
+* Reduce model performance
+* Indicate system failures or fraud
+* Lead to incorrect decisions
 
-This project addresses the problem by:
+This project addresses these challenges by:
 
-✔ Detecting anomalies in real-time  
-✔ Monitoring data drift continuously  
-✔ Providing live alerts and visualization  
+* Continuously monitoring incoming data
+* Detecting anomalies using machine learning
+* Identifying data drift using statistical methods
+* Providing real-time alerts and visualization
 
 ---
 
 ## 🧠 Key Features
 
-- 📊 Real-Time Data Streaming Simulation  
-- 🤖 Anomaly Detection using Isolation Forest  
-- ⚠️ Data Drift Detection using KS Test (Kolmogorov–Smirnov Test)  
-- 📈 Live Interactive Dashboard (Streamlit)  
-- 🚨 Alert System for Anomalies & Drift  
-- 🔴 Visual Highlighting of Anomalies  
-- 📊 Real-Time Metrics Display  
+* 📊 Real-time data streaming simulation
+* 🤖 Anomaly detection using Isolation Forest
+* ⚠️ Data drift detection using KS Test (Kolmogorov–Smirnov Test)
+* 📈 Interactive dashboard using Streamlit
+* 🚨 Alert system for anomalies and drift
+* 🔴 Visual highlighting of anomalies
+* 📊 Real-time metrics display
 
 ---
 
-## 🏗️ System Architecture
+## 🏗️ System Workflow
 
-Data Generation → Anomaly Detection → Drift Detection → Visualization → Alerts  
+Data Generation → Anomaly Detection → Drift Detection → Dashboard Visualization → Alerts
 
 ---
 
 ## 📂 Project Structure
+
+```
 real_time_anomaly_detection/
 │
-├── app.py # Streamlit dashboard
-├── model.py # Anomaly detection logic
-├── drift.py # Data drift detection
-├── generate_data.py # Real-time data simulation
-├── data.csv # Generated streaming data
+├── app.py                # Streamlit dashboard
+├── model.py              # Anomaly detection logic
+├── drift.py              # Data drift detection
+├── generate_data.py      # Real-time data simulation
+├── data.csv              # Streaming data
 ├── requirements.txt
-└── README.md
-
+└── screenshots/          # Project screenshots
+```
 
 ---
 
 ## ⚙️ Tech Stack
 
-- **Language:** Python  
-- **Libraries:** Pandas, NumPy, Scikit-learn, SciPy  
-- **Visualization:** Matplotlib  
-- **Dashboard:** Streamlit  
-- **Version Control:** Git & GitHub  
+* **Language:** Python
+* **Libraries:** Pandas, NumPy, Scikit-learn, SciPy
+* **Visualization:** Matplotlib
+* **Dashboard:** Streamlit
+* **Version Control:** Git & GitHub
 
 ---
 
 ## ▶️ How to Run
 
-### 1️⃣ Install Dependencies
-```bash
+### 1. Install dependencies
+
+```
 pip install -r requirements.txt
+```
 
-2️⃣ Run Application
+### 2. Run data generator (Terminal 1)
 
+```
+python generate_data.py
+```
+
+### 3. Run dashboard (Terminal 2)
+
+```
 streamlit run app.py
+```
 
-🌐 Live Demo
+---
 
-👉
+## 📸 Dashboard Preview
 
-📊 Dashboard Preview
-📈 Live Data Monitoring
+### 🔹 Top Section (Metrics + Alerts)
 
-(Add screenshot here)
+![Top](screenshots/dashboard_top.png)
 
-🚨 Anomaly Detection Alert
+### 🔹 Bottom Section (Graph + Table)
 
-(Add screenshot here)
+![Bottom](screenshots/dashboard_bottom.png)
 
-⚠️ Data Drift Warning
+---
 
-(Add screenshot here)
+## 🔍 Key Functionalities
 
-📈 Output & Functionality
+### 🔴 Anomaly Detection
 
-- Real-time data visualization
-- Automatic anomaly detection
-- Drift detection using statistical testing
-- Alert system for critical events
-- Continuous monitoring dashboard
+* Detects unusual data points using Isolation Forest
+* Highlights anomalies directly on the graph
 
+![Anomaly](screenshots/anomaly_detection.png)
 
-🧪 Drift Detection Logic
+---
 
-- Uses Kolmogorov–Smirnov (KS) Test
-- Compares historical vs recent data
-- Detects distribution changes
-- Triggers alert when p-value < 0.05
+### ⚠️ Data Drift Detection
 
+* Uses KS-Test to compare historical vs recent data
+* Detects distribution changes and triggers alerts
 
-💡 Use Cases
-- Fraud detection systems
-- Server & system monitoring
-- Financial anomaly detection
-- IoT sensor monitoring
-- ML model monitoring
+![Drift](screenshots/drift_detection.png)
 
+---
 
-🚀 Future Improvements
+## 📈 Output & Functionality
 
-📩 Email/SMS alert system
-🔄 Automated model retraining
-📊 Multi-feature anomaly detection
-☁️ Cloud deployment (AWS/GCP)
-🔗 Kafka integration for real streaming
+* Real-time monitoring of streaming data
+* Detection of abnormal patterns
+* Statistical drift detection
+* Visual alerts and metrics
+* Interactive dashboard
 
+---
 
-⭐ Key Highlights
+## 💡 Use Cases
 
-Built a real-time ML monitoring system
-Implemented anomaly detection using unsupervised learning
-Integrated statistical drift detection
-Designed an interactive dashboard
-Created a deployable end-to-end solution
+* Fraud detection systems
+* System and server monitoring
+* Financial anomaly detection
+* IoT sensor monitoring
+* ML model monitoring
 
+---
 
-🎤 Interview Explanation
+## 🚀 Future Improvements
 
-- “I developed a real-time anomaly detection and data drift monitoring system that uses Isolation Forest for anomaly detection and KS-Test for detecting distribution shifts, integrated with a Streamlit dashboard for live visualization and alerts.”
+* 📩 Email/SMS alert system
+* 🔄 Automated model retraining
+* 📊 Multi-feature anomaly detection
+* ☁️ Cloud deployment (AWS/GCP)
+* 🔗 Kafka integration for real-time streaming
 
-📌 Conclusion
+---
+
+## ⭐ Key Highlights
+
+* Built a real-time ML monitoring system
+* Applied unsupervised learning for anomaly detection
+* Implemented statistical drift detection
+* Designed an interactive dashboard
+* Worked through real-world deployment challenges
+
+---
+
+## 🎤 Interview Explanation
+
+“I developed a real-time anomaly detection and data drift monitoring system using Isolation Forest and KS-Test. The system simulates streaming data, detects anomalies, monitors distribution changes, and visualizes everything through a Streamlit dashboard with real-time alerts.”
+
+---
+
+## 📌 Conclusion
 
 This project demonstrates practical understanding of:
 
-Real-time data processing
-Machine learning monitoring
-Statistical analysis
-Dashboard development
+* Real-time data processing
+* Machine learning monitoring systems
+* Statistical analysis
+* Dashboard development
 
-It is highly relevant for roles in:
+Relevant for roles in:
 
-Machine Learning Engineering
-Data Science
-MLOps
+* Machine Learning Engineering
+* Data Science
+* MLOps
 
+---
 
-📜 License
+## 📜 License
 
-This project is for educational and demonstration purposes.
+This project is for educational purposes.

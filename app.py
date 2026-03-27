@@ -1,4 +1,3 @@
-from model import detect_anomalies
 import streamlit as st
 import time
 import matplotlib.pyplot as plt
@@ -35,16 +34,19 @@ while True:
                 if drift_detected:
                     st.warning(f"⚠️ Data Drift Detected (p={p_value:.5f})")
 
-                # 📈 GRAPH
+                # 📈 GRAPH (SMALLER SIZE 🔥)
                 st.subheader("📈 Live Data")
 
-                fig, ax = plt.subplots()
+                fig, ax = plt.subplots(figsize=(8, 3))  # 👈 reduced height
+
                 ax.plot(df["value"], label="Normal Data")
 
-                ax.scatter(anomalies.index,
-                           anomalies["value"],
-                           color="red",
-                           label="Anomaly")
+                ax.scatter(
+                    anomalies.index,
+                    anomalies["value"],
+                    color="red",
+                    label="Anomaly"
+                )
 
                 ax.legend()
                 st.pyplot(fig)
